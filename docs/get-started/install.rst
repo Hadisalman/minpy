@@ -15,7 +15,7 @@ There are generally three steps to follow:
 Install MXNet
 -------------
 
-The full guide of MXNet is `here  <http://mxnet.io/get_started/setup.html>`_ to build and install MXNet.
+The full guide of MXNet is `here  <https://mxnet.incubator.apache.org/install/index.html>`_ to build and install MXNet.
 Below, we give the common steps for Linux and OSX.
 
 On Ubuntu/Debian
@@ -24,14 +24,12 @@ With CUDA 8.0 and Cudnn 5.0 installed, install the other dependencies and build 
 ::
 
     sudo apt-get update
-    sudo apt-get install -y build-essential git libatlas-base-dev libopencv-dev
-    git clone --recursive -b engine https://github.com/dmlc/mxnet
+    sudo apt-get install -y build-essential git
+    sudo apt-get install -y libopenblas-dev liblapack-dev
+    sudo apt-get install -y libopencv-dev
+    git clone --recursive https://github.com/apache/incubator-mxnet.git mxnet --branch 0.12.1
     cd mxnet;
-    cp make/config.mk .
-    echo "USE_CUDA=1" >>config.mk
-    echo "USE_CUDA_PATH=/usr/local/cuda" >>config.mk
-    echo "USE_CUDNN=1" >>config.mk
-    make -j$(nproc)
+    make -j $(nproc) USE_OPENCV=1 USE_BLAS=openblas USE_CUDA=1 USE_CUDA_PATH=/usr/local/cuda USE_CUDNN=1
 
 On OSX
 ^^^^^^
